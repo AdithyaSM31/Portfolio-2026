@@ -67,10 +67,34 @@ export function initHero({ pointer, reduced }) {
     };
   });
 
+  // Phones: the camera widget sits under the nav, the telemetry card at the
+  // bottom, and the copy is centred in the space between them. If the screen
+  // is too short for all three, the bottom widgets step aside.
+  const cam = hero.querySelector('.wg--cv');
+  const bottomFloaters = [...hero.querySelectorAll('.wg--tm, .fl--volt')];
+  const copy = [...content.children];
+  const fitMobile = (h) => {
+    bottomFloaters.forEach((el) => (el.style.display = ''));
+    content.style.paddingTop = content.style.paddingBottom = '';
+    if (window.innerWidth >= 900 || !cam) return;
+    const gap = 12;
+    // rotated widgets poke out ~4% of their width beyond their layout box
+    const top = cam.offsetTop + cam.offsetHeight + cam.offsetWidth * 0.05 + gap;
+    const need = copy.at(-1).offsetTop + copy.at(-1).offsetHeight - copy[0].offsetTop;
+    const reserve = (els) => (els.length ? h - Math.min(...els.map((el) => el.offsetTop - el.offsetWidth * 0.04)) + gap : gap * 2);
+    // keep as many bottom widgets as fit: all of them, then just the orb, then none
+    const options = [bottomFloaters, bottomFloaters.filter((el) => el.classList.contains('fl--volt')), []];
+    const keep = options.find((els) => need <= h - top - reserve(els)) || [];
+    bottomFloaters.forEach((el) => (el.style.display = keep.includes(el) ? '' : 'none'));
+    content.style.paddingTop = `${top}px`;
+    content.style.paddingBottom = `${reserve(keep)}px`;
+  };
+
   // Offset from the stage centre (layout values, unaffected by transforms)
   const measure = () => {
     const w = stage.clientWidth;
     const h = stage.clientHeight;
+    fitMobile(h);
     for (const f of floaters) {
       f.cx = f.el.offsetLeft + f.el.offsetWidth / 2 - w / 2;
       f.cy = f.el.offsetTop + f.el.offsetHeight / 2 - h / 2;

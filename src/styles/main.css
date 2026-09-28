@@ -2082,23 +2082,44 @@ html:not(.js) .loader {
   .fl[data-mobile='hide'] {
     display: none;
   }
+  /* zones: camera under the nav, copy in the middle, telemetry + orb at the
+     bottom (hero.js fine-tunes the copy's padding to the measured widgets) */
   .fl--volt {
-    --w: 17vw !important;
-    left: 76%;
-    top: 69%;
+    --w: 16vw !important;
+    left: auto;
+    right: 6%;
+    top: auto;
+    bottom: 5%;
   }
   .wg--cv {
-    --w: 54vw !important;
-    left: 42%;
-    top: 8%;
+    --w: 44vw !important;
+    left: auto;
+    right: 5%;
+    top: calc(var(--nav-h) + 6px);
   }
   .wg--tm {
-    --w: 52vw !important;
-    left: 3%;
-    top: 74%;
+    --w: 46vw !important;
+    left: 5%;
+    top: auto;
+    bottom: 2.5%;
   }
   .hero__content {
-    padding-bottom: 12vh;
+    padding-top: calc(var(--nav-h) + 30vw + 90px);
+    padding-bottom: calc(15vw + 130px);
+    justify-content: center;
+    justify-content: safe center;
+  }
+  .hero__title {
+    margin: 20px 0 18px;
+  }
+  .hero__ctas {
+    margin-top: 22px;
+    gap: 10px;
+  }
+  .hero__ctas .btn {
+    --h: 46px;
+    padding: 0 18px;
+    font-size: 14.5px;
   }
   .hero__title {
     font-size: clamp(2.6rem, 13.4vw, 5.2rem);
