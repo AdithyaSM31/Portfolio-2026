@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adithya Sankar Menon — Software Engineer · AI & Robotics</title>
+    <meta
+      name="description"
+      content="Adithya Sankar Menon is a computer science engineer who builds AI products, full-stack systems and autonomous robots."
+    />
+    <meta name="theme-color" content="#060608" />
+    <meta property="og:title" content="Adithya Sankar Menon — Software Engineer · AI & Robotics" />
+    <meta property="og:description" content="Software that thinks. Machines that move." />
+    <meta property="og:image" content="/img/kuber.webp" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <!-- ───────── Loader ───────── -->
+    <div class="loader" aria-hidden="true">
+      <div class="loader__name">
+        <span class="loader__line" data-wipe-line>Adithya Sankar Menon</span>
+      </div>
+      <div class="loader__meta mono">
+        <span>Portfolio — 2026</span>
+        <span class="loader__count">000</span>
+      </div>
+      <div class="loader__bar"><i></i></div>
+    </div>
+
+    <!-- ───────── WebGL layer ───────── -->
+    <canvas class="gl" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ───────── Cursor ───────── -->
+    <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+    <!-- ───────── Nav ───────── -->
+    <header class="nav">
+      <a href="#top" class="nav__logo" aria-label="Adithya Sankar Menon — home">
+        <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+          <rect x="1" y="1" width="30" height="30" rx="9" fill="none" stroke="currentColor" stroke-width="1.6" />
+          <path d="M9 23 L16 9 L23 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="16" cy="19" r="2" fill="var(--accent)" />
+        </svg>
+        <span class="nav__name">Adithya Sankar Menon</span>
+      </a>
+      <nav class="nav__links mono" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav__right">
+        <span class="nav__clock mono" aria-label="Local time in Chennai"><i class="dot"></i><span data-clock>--:--</span> IST</span>
+        <a class="btn btn--accent btn--sm" data-link="resume" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
+        <button class="nav__menu" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+      </div>
+    </header>
+
+    <!-- ───────── Menu overlay ───────── -->
+    <div class="menu" aria-hidden="true">
+      <nav class="menu__links">
+        <a href="#work"><span class="mono">01</span>Work</a>
+        <a href="#about"><span class="mono">02</span>About</a>
+        <a href="#experience"><span class="mono">03</span>Experience</a>
+        <a href="#stack"><span class="mono">04</span>Stack</a>
+        <a href="#contact"><span class="mono">05</span>Contact</a>
+      </nav>
+      <div class="menu__foot mono">
+        <a data-link="email"></a>
+        <span><a data-link="github" target="_blank" rel="noopener">GitHub</a> · <a data-link="linkedin" target="_blank" rel="noopener">LinkedIn</a></span>
+      </div>
+    </div>
+
+    <main>
+      <!-- ───────── Hero ───────── -->
+      <section class="hero" id="top" data-shape="0" data-dim="0.7">
+        <div class="hero__stage">
+          <div class="floaters" aria-hidden="true">
+            <!-- neural net -->
+            <div class="fl wg wg--nn" style="--x: 6%; --y: 15%; --w: 16vw; --z: 20; --r: -4deg" data-mobile="hide">
+              <div class="wg__bar"><i></i><i></i><i></i><span>model.infer(frame)</span></div>
+              <svg class="nn" viewBox="0 0 200 104"></svg>
+              <div class="nn__out">
+                <div class="nn__row"><span>drone</span><em><i></i></em><b>0.90</b></div>
+                <div class="nn__row"><span>rover</span><em><i></i></em><b>0.07</b></div>
+                <div class="nn__row"><span>arm</span><em><i></i></em><b>0.03</b></div>
+              </div>
+            </div>
+            <!-- camera tracker -->
+            <div class="fl wg wg--cv" style="--x: 70%; --y: 11%; --w: 19vw; --z: 60; --r: 4deg">
+              <div class="wg__bar"><i></i><i></i><i></i><span>cam0 · aruco</span><b class="wg__rec">REC</b></div>
+              <div class="cv">
+                <div class="cv__marker"></div>
+                <div class="cv__box"><span>aruco_42 <em data-cv-conf>0.98</em></span></div>
+              </div>
+              <div class="wg__foot"><span>30 fps</span><span>12 ms</span><span data-cv-xy>x 0.00 · y 0.00</span></div>
+            </div>
+            <div class="fl fl--volt" style="--x: 83%; --y: 52%; --w: 6.5vw; --z: 80">
+              <span class="mono">AI / ML</span>
+            </div>
+            <!-- flight telemetry -->
+            <div class="fl wg wg--tm" style="--x: 6.5%; --y: 62%; --w: 18vw; --z: 50; --r: -3deg">
+              <div class="wg__bar"><i></i><i></i><i></i><span>telemetry · uav-01</span><b class="wg__live">LIVE</b></div>
+              <svg class="tm__spark" viewBox="0 0 200 60" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="tmFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#d2ff3a" stop-opacity="0.35" />
+                    <stop offset="1" stop-color="#d2ff3a" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <path class="tm__area" fill="url(#tmFill)" />
+                <polyline class="tm__line" />
+                <circle class="tm__dot" r="2.6" />
+              </svg>
+              <div class="tm__stats">
+                <div><span>alt</span><b data-tm="alt">1.20</b><em>m</em></div>
+                <div><span>vel</span><b data-tm="vel">0.32</b><em>m/s</em></div>
+                <div><span>bat</span><b data-tm="bat">87</b><em>%</em><span class="tm__bat"><i></i></span></div>
+              </div>
+            </div>
+            <!-- terminal -->
+            <div class="fl wg wg--term" style="--x: 68%; --y: 75%; --w: 20vw; --z: 40; --r: 1deg" data-mobile="hide">
+              <div class="wg__bar"><i></i><i></i><i></i><span>zsh · ~/adithya</span></div>
+              <div class="term__lines" data-term></div>
+            </div>
+          </div>
+
+          <div class="hero__content">
+            <a href="#experience" class="pill mono" data-hero-in>
+              <i class="dot"></i><span class="pill__long">Just wrapped a</span> SWE internship at AdConvergence <span class="pill__cta">Read more</span>
+            </a>
+            <h1 class="hero__title" aria-label="I build things that think, move, see, scale and ship.">
+              <span class="ln"><span>I build things</span></span>
+              <span class="ln"><span>that <span class="rotator" data-rotator><em>think.</em><em>move.</em><em>see.</em><em>scale.</em><em>ship.</em></span></span></span>
+            </h1>
+            <p class="hero__sub" data-hero-in>
+              I’m Adithya Sankar Menon, a software engineer specialising in AI &amp; Robotics. I ship full-stack products, intelligent systems and autonomous machines.
+            </p>
+            <div class="hero__ctas" data-hero-in>
+              <a href="#work" class="btn btn--accent" data-magnetic>See selected work <span aria-hidden="true">↓</span></a>
+              <a class="btn btn--ghost" data-link="resume" target="_blank" rel="noopener" data-magnetic>Resume <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <div class="hero__scroll mono" data-hero-in><span>Scroll</span><i></i></div>
+        </div>
+      </section>
+
+      <!-- ───────── About ───────── -->
+      <section class="about" id="about" data-shape="1">
+        <div class="wrap">
+          <div class="about__grid">
+            <div class="about__copy">
+              <div class="eyebrow mono"><span>(01)</span> About</div>
+              <p class="manifesto" data-manifesto>
+                Hi, I’m Adithya, a computer science engineer at VIT Chennai working where <em>code meets the physical world.</em> I design full-stack systems, train models that make decisions, and build machines that act on them.
+              </p>
+            </div>
+            <figure class="about__portrait" data-portrait>
+              <div class="about__frame"><img src="/img/portrait.webp" alt="Portrait of Adithya Sankar Menon" loading="lazy" /></div>
+              <figcaption class="mono"><span>Adithya S. Menon</span><span>Kochi, IN</span></figcaption>
+            </figure>
+          </div>
+          <div class="stats">
+            <div class="stat"><span class="stat__n" data-count="3" data-suffix="+">3+</span><span class="mono">Years building</span></div>
+            <div class="stat"><span class="stat__n" data-count="20" data-suffix="+">20+</span><span class="mono">Projects shipped</span></div>
+            <div class="stat"><span class="stat__n" data-count="13">13</span><span class="mono">Certifications</span></div>
+            <div class="stat"><span class="stat__n" data-count="8.66" data-decimals="2">8.66</span><span class="mono">CGPA · VIT Chennai</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── Reel: image grows out of the headline ───────── -->
+      <section class="reel" id="reel" data-shape="1">
+        <div class="reel__stage">
+          <h2 class="reel__line" aria-label="Built to ship.">
+            <span class="reel__word reel__word--l">Built</span>
+            <span class="reel__gap" aria-hidden="true"></span>
+            <span class="reel__word reel__word--r">to ship.</span>
+          </h2>
+          <div class="reel__media" aria-hidden="true">
+            <div class="reel__grid">
+              <figure><img src="/img/syncforge.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/drone.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/twinmind.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/neuroniq.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/kuber.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/floatchart.webp" alt="" decoding="async" /></figure>
+              <figure class="g-center"><img src="/img/circuit-stream.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/qflow.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/t-zero.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/aura.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/rc-car.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/ghost-chat.webp" alt="" decoding="async" /></figure>
+              <figure><img src="/img/photoinsights.webp" alt="" decoding="async" /></figure>
+            </div>
+          </div>
+          <div class="reel__caption">
+            <span class="mono">20+ products</span>
+            <span>across AI, distributed systems and robotics. Some are live, some fly.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── Work ───────── -->
+      <section class="work" id="work" data-shape="2" data-dim="0.55">
+        <div class="wrap">
+          <header class="sec-head">
+            <div class="eyebrow mono"><span>(02)</span> Selected work</div>
+            <h2 class="h2" data-wipe>Things I’ve <em>built</em><br />and shipped.</h2>
+            <p class="sec-head__aside mono">2023 — 2026<br />06 featured · 14 archived</p>
+          </header>
+        </div>
+        <div class="stack-cards" data-featured></div>
+
+        <div class="wrap archive">
+          <div class="archive__head">
+            <h3 class="h3" data-wipe>The archive</h3>
+            <span class="mono dim">More experiments, hackathons &amp; tools · hover for details</span>
+          </div>
+          <ul class="archive__list" data-archive></ul>
+          <aside class="acard" aria-hidden="true">
+            <div class="acard__img"><img alt="" /></div>
+            <div class="acard__body">
+              <div class="acard__top mono"><span class="acard__i"></span><span class="acard__tags"></span></div>
+              <h4 class="acard__t"></h4>
+              <div class="acard__details"></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ───────── Experience wheel ───────── -->
+      <section class="exp" id="experience" data-shape="3" data-dim="0.7">
+        <div class="exp__stage">
+          <div class="wrap exp__inner">
+            <div class="exp__left">
+              <div class="eyebrow mono"><span>(03)</span> Experience</div>
+              <div class="wheel" data-wheel></div>
+              <div class="exp__progress mono"><span data-exp-idx>01</span> / <span data-exp-total>05</span></div>
+            </div>
+            <div class="exp__right" data-exp-panels></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── Stack ───────── -->
+      <section class="stack" id="stack" data-shape="4" data-dim="0.85">
+        <div class="wrap">
+          <header class="sec-head">
+            <div class="eyebrow mono"><span>(04)</span> Capabilities</div>
+            <h2 class="h2" data-wipe>A toolkit that runs<br />from <em>silicon</em> to UI.</h2>
+          </header>
+        </div>
+        <div class="bigmarquee" aria-hidden="true">
+          <div class="bigmarquee__row" data-bigmarquee="1"></div>
+          <div class="bigmarquee__row bigmarquee__row--out" data-bigmarquee="-1"></div>
+        </div>
+        <div class="wrap">
+          <div class="skills" data-skills></div>
+        </div>
+      </section>
+
+      <!-- ───────── Credentials ───────── -->
+      <section class="creds" id="credentials" data-shape="4" data-dim="0.6">
+        <div class="wrap">
+          <header class="sec-head">
+            <div class="eyebrow mono"><span>(05)</span> Credentials</div>
+            <h2 class="h2" data-wipe>Education &amp;<br /><em>certifications.</em></h2>
+          </header>
+          <div class="edu" data-edu></div>
+          <div class="certs">
+            <div class="certs__head mono"><span>Certification</span><span>Issuer</span><span>Date</span></div>
+            <ul data-certs></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── Contact ───────── -->
+      <section class="contact" id="contact" data-shape="5">
+        <div class="wrap">
+          <div class="eyebrow mono"><span>(06)</span> Contact</div>
+          <h2 class="contact__title" data-wipe>Let’s build something<br />that <em>moves.</em></h2>
+          <p class="contact__sub">
+            I’m open to SDE roles and collaborations in AI, full-stack and robotics. If you’re building something ambitious, I’d like to hear about it.
+          </p>
+          <a class="contact__mail" data-link="email" data-cursor="Write">
+            <span data-email-text></span><span class="contact__arrow" aria-hidden="true">↗</span>
+          </a>
+          <div class="contact__grid">
+            <div><span class="mono dim">Based in</span><span>Kochi, India</span></div>
+            <div><span class="mono dim">Local time</span><span><span data-clock>--:--</span> IST</span></div>
+            <div><span class="mono dim">Phone</span><a data-link="phone"></a></div>
+            <div>
+              <span class="mono dim">Elsewhere</span>
+              <span class="contact__socials">
+                <a data-link="github" target="_blank" rel="noopener">GitHub</a>
+                <a data-link="linkedin" target="_blank" rel="noopener">LinkedIn</a>
+                <a data-link="resume" target="_blank" rel="noopener">Resume</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ───────── Footer: physics pile ───────── -->
+    <footer class="footer">
+      <div class="pile" data-pile>
+        <div class="pile__mark" aria-hidden="true">adithya</div>
+      </div>
+      <div class="footer__bar wrap mono">
+        <span>© 2026 Adithya Sankar Menon</span>
+        <span class="footer__hint">Grab &amp; throw things</span>
+        <a href="#top" data-top>Back to top ↑</a>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
