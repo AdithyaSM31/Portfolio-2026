@@ -5,7 +5,7 @@ export const links = {
   phone: '+91 73563 18402',
   github: 'https://github.com/AdithyaSM31',
   linkedin: 'https://linkedin.com/in/adithya-sankar-menon/',
-  resume: 'https://drive.google.com/file/d/16Nbo3FbSeHK-BmdCkU7TMaJ8FM05hC46/view?usp=drive_link',
+  resume: 'https://drive.google.com/file/d/1yuP-UEtukaR3q6Mqt6VxlV0LN3WggYz5/view?usp=drive_link',
 };
 
 // Featured projects — rendered as the stacked cards in "Selected work".
