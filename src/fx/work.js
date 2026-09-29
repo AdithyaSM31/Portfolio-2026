@@ -53,6 +53,9 @@ export function initArchive({ lenis }) {
   };
 
   const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches && card;
+  // set by a long-press so the tap that ends it doesn't also toggle the row
+  const press = { suppressClick: false };
+  if (!canHover) initLongPress(rows, press, lenis);
 
   rows.forEach((row) => {
     const head = row.querySelector('.arow__row');
@@ -63,6 +66,7 @@ export function initArchive({ lenis }) {
       }
     });
     head.addEventListener('click', () => {
+      if (press.suppressClick) return (press.suppressClick = false);
       if (!canHover) return toggle(row);
       // desktop: the row opens the project's main link
       const first = row.querySelector('.adet__links a');
@@ -147,4 +151,116 @@ export function initArchive({ lenis }) {
   };
   if (lenis) lenis.on('scroll', recheck);
   else window.addEventListener('scroll', recheck, { passive: true });
+}
+
+// Touch: long-press an archive row to open its details in a bottom sheet.
+// A normal tap still expands the row in place; scrolling cancels the press.
+function initLongPress(rows, press, lenis) {
+  const sheet = document.querySelector('.asheet');
+  if (!sheet) return;
+  const panel = sheet.querySelector('.asheet__panel');
+  const backdrop = sheet.querySelector('.asheet__backdrop');
+  const closeBtn = sheet.querySelector('.asheet__close');
+  const HOLD = 450;
+  let timer = 0;
+  let pressed = null;
+  let start = { x: 0, y: 0 };
+  let open = false;
+  let returnFocus = null;
+
+  const cancel = () => {
+    clearTimeout(timer);
+    pressed?.classList.remove('is-pressing');
+    pressed = null;
+  };
+
+  const openSheet = (row) => {
+    sheet.querySelector('[data-sheet-i]').textContent = row.querySelector('.arow__i').textContent;
+    sheet.querySelector('[data-sheet-tags]').textContent = row.querySelector('.arow__g').textContent;
+    sheet.querySelector('[data-sheet-title]').textContent = row.querySelector('.arow__t').textContent;
+    sheet.querySelector('.asheet__img img').src = row.querySelector('.arow__thumb').src;
+    sheet.querySelector('[data-sheet-details]').innerHTML = row.querySelector('.arow__inner').innerHTML;
+    panel.scrollTop = 0;
+    open = true;
+    returnFocus = row.querySelector('.arow__row');
+    sheet.classList.add('is-open');
+    sheet.setAttribute('aria-hidden', 'false');
+    lenis?.stop();
+    gsap.to(backdrop, { opacity: 1, duration: 0.35, overwrite: true });
+    gsap.fromTo(panel, { yPercent: 110, y: 0 }, { yPercent: 0, duration: 0.6, ease: 'expo.out', overwrite: true });
+    closeBtn.focus({ preventScroll: true });
+  };
+
+  const closeSheet = () => {
+    if (!open) return;
+    open = false;
+    sheet.setAttribute('aria-hidden', 'true');
+    gsap.to(backdrop, { opacity: 0, duration: 0.3, overwrite: true });
+    gsap.to(panel, {
+      yPercent: 110,
+      duration: 0.45,
+      ease: 'power3.in',
+      overwrite: true,
+      onComplete: () => {
+        sheet.classList.remove('is-open');
+        gsap.set(panel, { y: 0 });
+        lenis?.start();
+        returnFocus?.focus({ preventScroll: true });
+      },
+    });
+  };
+
+  rows.forEach((row) => {
+    const head = row.querySelector('.arow__row');
+    head.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse') return;
+      cancel();
+      pressed = row;
+      start = { x: e.clientX, y: e.clientY };
+      row.classList.add('is-pressing');
+      timer = setTimeout(() => {
+        row.classList.remove('is-pressing');
+        pressed = null;
+        press.suppressClick = true;
+        // if the browser doesn't follow the long-press with a click, don't
+        // let the flag swallow the next genuine tap
+        setTimeout(() => (press.suppressClick = false), 700);
+        navigator.vibrate?.(12);
+        openSheet(row);
+      }, HOLD);
+    });
+    head.addEventListener('pointermove', (e) => {
+      if (pressed && Math.hypot(e.clientX - start.x, e.clientY - start.y) > 10) cancel();
+    });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach((t) => head.addEventListener(t, cancel));
+    // no native "save image / copy" menu on long-press
+    head.addEventListener('contextmenu', (e) => e.preventDefault());
+  });
+  window.addEventListener('scroll', cancel, { passive: true });
+
+  sheet.querySelectorAll('[data-sheet-close]').forEach((el) => el.addEventListener('click', closeSheet));
+  window.addEventListener('keydown', (e) => e.key === 'Escape' && closeSheet());
+
+  // swipe the sheet down (by its handle or image) to dismiss
+  let drag = null;
+  sheet.querySelectorAll('[data-sheet-drag]').forEach((el) => {
+    el.addEventListener('pointerdown', (e) => {
+      drag = { y0: e.clientY, dy: 0 };
+      el.setPointerCapture(e.pointerId);
+    });
+    el.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      drag.dy = Math.max(0, e.clientY - drag.y0);
+      gsap.set(panel, { y: drag.dy });
+    });
+    const end = () => {
+      if (!drag) return;
+      const { dy } = drag;
+      drag = null;
+      if (dy > 90) closeSheet();
+      else gsap.to(panel, { y: 0, duration: 0.4, ease: 'expo.out' });
+    };
+    el.addEventListener('pointerup', end);
+    el.addEventListener('pointercancel', end);
+  });
 }

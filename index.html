@@ -76,6 +76,21 @@
       </div>
     </div>
 
+    <!-- ───────── Archive details sheet (touch: long-press a row) ───────── -->
+    <div class="asheet" role="dialog" aria-modal="true" aria-labelledby="asheet-title" aria-hidden="true">
+      <div class="asheet__backdrop" data-sheet-close></div>
+      <div class="asheet__panel" data-lenis-prevent>
+        <div class="asheet__grip" data-sheet-drag><i></i></div>
+        <button class="asheet__close" data-sheet-close aria-label="Close project details">✕</button>
+        <div class="asheet__img" data-sheet-drag><img alt="" /></div>
+        <div class="asheet__body">
+          <div class="acard__top mono"><span class="acard__i" data-sheet-i></span><span data-sheet-tags></span></div>
+          <h4 class="acard__t asheet__t" id="asheet-title" data-sheet-title></h4>
+          <div data-sheet-details></div>
+        </div>
+      </div>
+    </div>
+
     <main>
       <!-- ───────── Hero ───────── -->
       <section class="hero" id="top" data-shape="0" data-dim="0.7">
@@ -221,7 +236,7 @@
         <div class="wrap archive">
           <div class="archive__head">
             <h3 class="h3" data-wipe>The archive</h3>
-            <span class="mono dim">More experiments, hackathons &amp; tools · hover for details</span>
+            <span class="mono dim">More experiments, hackathons &amp; tools · <span class="only-hover">hover</span><span class="only-touch">long-press</span> for details</span>
           </div>
           <ul class="archive__list" data-archive></ul>
           <aside class="acard" aria-hidden="true">
