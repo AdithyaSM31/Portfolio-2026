@@ -81,6 +81,10 @@ export function renderContent() {
       .join('');
   }
 
+  // "08 featured · 35 archived", from the data
+  const count = $('[data-work-count]');
+  if (count) count.textContent = `${pad(featured.length)} featured · ${pad(archive.length)} archived`;
+
   // Archive list: each row carries an expandable details panel (used as an
   // accordion on touch and keyboard; desktop hover shows the same details in a card)
   const al = $('[data-archive]');
@@ -91,7 +95,7 @@ export function renderContent() {
       <li class="arow" data-i="${i}">
         <div class="arow__row" tabindex="0" role="button" aria-expanded="false" aria-controls="arow-${i}">
           <img class="arow__thumb" src="${p.img}" alt="" loading="lazy" />
-          <span class="arow__i mono">${pad(i + 7)}</span>
+          <span class="arow__i mono">${pad(featured.length + i + 1)}</span>
           <span class="arow__t">${esc(p.title)}</span>
           <span class="arow__d">${esc(p.desc)}</span>
           <span class="arow__g mono">${esc(p.tags)}</span>
